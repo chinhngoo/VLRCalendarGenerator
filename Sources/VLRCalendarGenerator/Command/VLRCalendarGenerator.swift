@@ -74,11 +74,6 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
                 logger: logger
             )
         }
-        
-        // Generate a simple index.html with links to all generated ICS files
-        let indexURL = outDirURL.appendingPathComponent("generatedhtml.html")
-        try html.write(to: indexURL, atomically: true, encoding: .utf8)
-        logger.info("Wrote site index to \(indexURL.path)")
     }
     
     private func writeICSFile(
