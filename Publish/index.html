@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>VCT Calendar</title>
+        <style>
+            body {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+                padding: 16px;
+            }
+            
+            details {
+                margin: 4px 0;
+            }
+            
+            /* Indentation by level */
+            .level-1 { margin-left: 0; }
+            .level-2 { margin-left: 20px; }
+            .level-3 { margin-left: 40px; }
+            
+            summary {
+                list-style: none;
+                cursor: pointer;
+            }
+            
+            summary::-webkit-details-marker {
+                display: none;
+            }
+            
+            /* Optional: add own marker */
+            summary::before {
+                content: "▸";
+                display: inline-block;
+                margin-right: 6px;
+                transition: transform 0.15s ease-out;
+            }
+            
+            details[open] > summary::before {
+                transform: rotate(90deg);
+            }
+            
+            .node-label {
+                font-weight: 500;
+                margin-right: 8px;
+            }
+            
+            .icon-link {
+                display: inline-flex;
+                align-items: center;
+                margin-right: 10px;
+                margin-left: 10px;
+                text-decoration: none;
+            }
+            
+            .icon-link img {
+                width: 16px;
+                height: 16px;
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <!-- Level 1: VCT -->
+        <details class="level-1" open>
+            <summary>
+                <span class="node-label">VCT</span>
+                <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/VCT.ics" target="_blank" rel="noopener">
+                    Google Calendar
+                </a>
+                <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/VCT.ics" target="_blank" rel="noopener">
+                    Apple Calendar
+                </a>
+            </summary>
+            
+            <!-- Level 2 -->
+            <details class="level-2" open>
+                <summary>
+                    <span class="node-label">VCT 2026: Americas Kickoff</span>
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main//Users/chinhngo/Documents/Sources/VLRCalendarGenerator/Publish/ICS/VCT_2026__Americas_Kickoff.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main//Users/chinhngo/Documents/Sources/VLRCalendarGenerator/Publish/ICS/VCT_2026__Americas_Kickoff.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </summary>
+                
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - 100 Thieves
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/100_Thieves.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/100_Thieves.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Cloud9
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Cloud9.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Cloud9.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Evil Geniuses
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Evil_Geniuses.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Evil_Geniuses.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - FURIA
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/FURIA.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/FURIA.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - KRÜ Esports
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/KRU_Esports.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/KRU_Esports.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - LEVIATÁN
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/LEVIATAN.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/LEVIATAN.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - LOUD
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/LOUD.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/LOUD.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - MIBR
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/MIBR.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/MIBR.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - NRG
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/NRG.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/NRG.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Sentinels
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Sentinels.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Sentinels.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - G2 Esports
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/G2_Esports.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/G2_Esports.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - ENVY
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/ENVY.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/ENVY.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                
+            </details>
+            
+            <!-- Level 2 -->
+            <details class="level-2" open>
+                <summary>
+                    <span class="node-label">VCT 2026: China Kickoff</span>
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/VCT_2026__China_Kickoff.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/VCT_2026__China_Kickoff.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </summary>
+                
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - All Gamers
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/All_Gamers.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/All_Gamers.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Bilibili Gaming
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Bilibili_Gaming.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Bilibili_Gaming.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - EDward Gaming
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/EDward_Gaming.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/EDward_Gaming.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - FunPlus Phoenix
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/FunPlus_Phoenix.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/FunPlus_Phoenix.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - JDG Esports
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/JDG_Esports.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/JDG_Esports.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Nova Esports
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Nova_Esports.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Nova_Esports.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Titan Esports Club
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Titan_Esports_Club.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Titan_Esports_Club.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Trace Esports
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Trace_Esports.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Trace_Esports.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - TYLOO
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/TYLOO.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/TYLOO.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Wolves Esports
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Wolves_Esports.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Wolves_Esports.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Xi Lai Gaming
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Xi_Lai_Gaming.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Xi_Lai_Gaming.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Dragon Ranger Gaming
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Dragon_Ranger_Gaming.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Dragon_Ranger_Gaming.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                
+            </details>
+            
+            <!-- Level 2 -->
+            <details class="level-2" open>
+                <summary>
+                    <span class="node-label">VCT 2026: EMEA Kickoff</span>
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/VCT_2026__EMEA_Kickoff.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/VCT_2026__EMEA_Kickoff.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </summary>
+                
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - BBL Esport
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/BBL_Esport.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/BBL_Esport.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - FNATIC
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/FNATIC.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/FNATIC.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - FUT Esports
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/FUT_Esports.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/FUT_Esports.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Gentle Mates
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Gentle_Mates.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Gentle_Mates.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - GIANTX
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/GIANTX.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/GIANTX.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Karmine Corp
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Karmine_Corp.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Karmine_Corp.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Natus Vincere
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Natus_Vincere.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Natus_Vincere.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Team Heretics
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Team_Heretics.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Team_Heretics.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Team Liquid
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Team_Liquid.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Team_Liquid.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Team Vitality
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Team_Vitality.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Team_Vitality.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - ULF Esports
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/ULF_Esports.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/ULF_Esports.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - PCIFIC Esports
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/PCIFIC_Esports.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/PCIFIC_Esports.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                
+            </details>
+            
+            <!-- Level 2 -->
+            <details class="level-2" open>
+                <summary>
+                    <span class="node-label">VCT 2026: Pacific Kickoff</span>
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/VCT_2026__Pacific_Kickoff.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/VCT_2026__Pacific_Kickoff.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                    
+                </summary>
+                
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - DetonatioN FocusMe
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/DetonatioN_FocusMe.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/DetonatioN_FocusMe.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - DRX
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/DRX.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/DRX.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - FULL SENSE
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/FULL_SENSE.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/FULL_SENSE.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Gen.G
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Gen.G.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Gen.G.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Global Esports
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Global_Esports.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Global_Esports.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Paper Rex
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Paper_Rex.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Paper_Rex.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Rex Regum Qeon
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Rex_Regum_Qeon.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Rex_Regum_Qeon.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - T1
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/T1.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/T1.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Team Secret
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Team_Secret.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Team_Secret.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - ZETA DIVISION
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/ZETA_DIVISION.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/ZETA_DIVISION.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - VARREL
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/VARREL.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/VARREL.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                <!-- Level 3 -->
+                <div class="level-3">
+                    - Nongshim RedForce
+                    <a class="icon-link" href="https://www.google.com/calendar/render?cid=webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Nongshim_RedForce.ics" target="_blank" rel="noopener">
+                        Google Calendar
+                    </a>
+                    <a class="icon-link" href="webcal://raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/main/Publish/ICS/Nongshim_RedForce.ics" target="_blank" rel="noopener">
+                        Apple Calendar
+                    </a>
+                </div>
+                
+            </details>
+        </details>
+        
+    </body>
+</html>
+
