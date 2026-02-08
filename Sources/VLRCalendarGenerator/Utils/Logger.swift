@@ -24,8 +24,10 @@ struct Logger: Logging {
         guard isVerbose else { return }
         print("[DEBUG] " + message())
     }
-
+    
     func error(_ message: @autoclosure () -> String) {
-        fputs("❌ " + message() + "\n", stderr)
+        if let data = ("❌ " + message() + "\n").data(using: .utf8) {
+            try? FileHandle.standardError.write(contentsOf: data)
+        }
     }
 }
