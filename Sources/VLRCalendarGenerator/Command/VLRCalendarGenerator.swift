@@ -63,8 +63,7 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
         }
 
         // Per team ICS
-        let allTeams = AMERICATeams + ChinaTeams + EMEATeams + PACIFICTeams
-        for team in allTeams {
+        for team in Team.allCases {
             let name = team.rawValue
             let filtered = allMatches.filter { $0.homeTeam == name || $0.awayTeam == name }
             try writeICSFile(
