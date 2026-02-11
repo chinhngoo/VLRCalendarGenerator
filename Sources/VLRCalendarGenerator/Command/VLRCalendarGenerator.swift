@@ -68,6 +68,7 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
                 let fileName = try writeICSFile(
                     matches: tournamentDictionary[name, default: []],
                     outDirURL: output,
+                    calendarName: name,
                     name: sanitizedFileName(name),
                     logger: logger
                 )
@@ -81,6 +82,7 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
                 let fileName = try writeICSFile(
                     matches: teamDictionary[name, default: []],
                     outDirURL: output,
+                    calendarName: name,
                     name: sanitizedFileName(name),
                     logger: logger
                 )
@@ -88,16 +90,18 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
             }
             regionFeeds.append(feed)
         }
+        let allMatchesName = "All VCT Matches"
         let vctFileName = try writeICSFile(
             matches: vctMatches,
             outDirURL: output,
+            calendarName: allMatchesName,
             name: "All_VCT_Matches",
             logger: logger
         )
 
         return VCTData(
             allVCTMatches: CalendarSource(
-                name: "All VCT Matches",
+                name: allMatchesName,
                 fileName: vctFileName
             ),
             regions: regionFeeds
@@ -107,6 +111,7 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
     private func writeICSFile(
         matches: [Match],
         outDirURL: URL,
+        calendarName: String,
         name: String,
         logger: Logging
     ) throws -> String {
@@ -115,7 +120,7 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
         }
         // Sometimes, there is no scheduled event for a specific team if they are eliminated
         // but the ics file should still updated so subsribers aren't interrupted
-        let content = buildICS(from: matches)
+        let content = buildICS(from: matches, name: name)
         let URL = outDirURL.appendingPathComponent(name + ".ics")
         try content.write(to: URL, atomically: true, encoding: .utf8)
         logger.info("Wrote \(name) events to \(URL.path)")

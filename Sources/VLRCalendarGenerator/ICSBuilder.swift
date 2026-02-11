@@ -61,11 +61,12 @@ func vevent(for match: Match, now: Date = Date()) -> String {
 }
 
 // Build a full VCALENDAR from matches.
-func buildICS(from matches: [Match]) -> String {
+func buildICS(from matches: [Match], name: String) -> String {
     var lines: [String] = []
     lines.append("BEGIN:VCALENDAR")
     lines.append("VERSION:2.0")
     lines.append("PRODID:-//VLRCalendarGenerator//EN")
+    lines.append("X-WR-CALNAME:\(name)")
     lines.append("CALSCALE:GREGORIAN")
     lines.append("METHOD:PUBLISH")
 
