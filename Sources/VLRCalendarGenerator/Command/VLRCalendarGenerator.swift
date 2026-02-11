@@ -5,8 +5,8 @@
 //  Created by Chinh Ngo on 02.02.26.
 //
 
-import Foundation
 import ArgumentParser
+import Foundation
 
 @main
 struct VLRCalendarGenerator: AsyncParsableCommand {

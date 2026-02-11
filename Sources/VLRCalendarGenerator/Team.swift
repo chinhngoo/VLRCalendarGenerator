@@ -7,115 +7,115 @@
 
 enum Team: String, Codable, CaseIterable {
     // EMEA Partners
-    case BBLEsport = "BBL Esport"
-    case FNATIC = "FNATIC"
-    case FUTEsports = "FUT Esports"
-    case GentleMates = "Gentle Mates"
-    case GIANTX = "GIANTX"
-    case KarmineCorp = "Karmine Corp"
-    case NatusVincere = "Natus Vincere"
-    case TeamHeretics = "Team Heretics"
-    case TeamLiquid = "Team Liquid"
-    case TeamVitality = "Team Vitality"
-    case ULFEsports = "ULF Esports"
-    case PCIFICEsports = "PCIFIC Esports"
+    case bblEsport = "BBL Esport"
+    case fnatic = "FNATIC"
+    case futEsports = "FUT Esports"
+    case gentleMates = "Gentle Mates"
+    case giantx = "GIANTX"
+    case karmineCorp = "Karmine Corp"
+    case natusVincere = "Natus Vincere"
+    case teamHeretics = "Team Heretics"
+    case teamLiquid = "Team Liquid"
+    case teamVitality = "Team Vitality"
+    case ulfEsports = "ULF Esports"
+    case pcificEsports = "PCIFIC Esports"
     // AMERICA Partners
-    case HunredThieves = "100 Thieves"
-    case Cloud9 = "Cloud9"
-    case EvilGeniuses = "Evil Geniuses"
-    case FURIA = "FURIA"
-    case KRUEsports = "KRÜ Esports"
-    case LEVIATAN = "LEVIATÁN"
-    case LOUD = "LOUD"
-    case MIBR = "MIBR"
-    case NRG = "NRG"
-    case Sentinels = "Sentinels"
-    case G2Esports = "G2 Esports"
-    case ENVY = "ENVY"
+    case hunredThieves = "100 Thieves"
+    case cloud9 = "Cloud9"
+    case evilGeniuses = "Evil Geniuses"
+    case furia = "FURIA"
+    case kruEsports = "KRÜ Esports"
+    case leviatan = "LEVIATÁN"
+    case loud = "LOUD"
+    case mibr = "MIBR"
+    case nrg = "NRG"
+    case sentinels = "Sentinels"
+    case g2Esports = "G2 Esports"
+    case envy = "ENVY"
     // PACIFIC Partners
-    case DetonatioNFocusMe = "DetonatioN FocusMe"
-    case DRX = "DRX"
-    case FullSense = "FULL SENSE"
-    case GenG = "Gen.G"
-    case GlobalEsports = "Global Esports"
-    case PaperRex = "Paper Rex"
-    case RexRegumQeon = "Rex Regum Qeon"
-    case T1 = "T1"
-    case TeamSecret = "Team Secret"
-    case ZetaDivision = "ZETA DIVISION"
-    case VARREL = "VARREL"
-    case NongshimRedForce = "Nongshim RedForce"
+    case detonationFocusMe = "DetonatioN FocusMe"
+    case drx = "DRX"
+    case fullSense = "FULL SENSE"
+    case genG = "Gen.G"
+    case globalEsports = "Global Esports"
+    case paperRex = "Paper Rex"
+    case rexRegumQeon = "Rex Regum Qeon"
+    case t1 = "T1"
+    case teamSecret = "Team Secret"
+    case zetaDivision = "ZETA DIVISION"
+    case varrel = "VARREL"
+    case nongshimRedForce = "Nongshim RedForce"
     // CHINA Partners
-    case AllGamers = "All Gamers"
-    case BilibililiGaming = "Bilibili Gaming"
-    case EdwardGaming = "EDward Gaming"
-    case FunPlusPhoenix = "FunPlus Phoenix"
-    case JDGEsports = "JDG Esports"
-    case NovaEsports = "Nova Esports"
-    case TitaEsportsClub = "Titan Esports Club"
-    case TraceEsports = "Trace Esports"
-    case TYLOO = "TYLOO"
-    case WolvesEsports = "Wolves Esports"
-    case XiLaiGaming = "Xi Lai Gaming"
-    case DragonRangerGaming = "Dragon Ranger Gaming"
+    case allGamers = "All Gamers"
+    case bilibililiGaming = "Bilibili Gaming"
+    case edwardGaming = "EDward Gaming"
+    case funPlusPhoenix = "FunPlus Phoenix"
+    case jdgEsports = "JDG Esports"
+    case novaEsports = "Nova Esports"
+    case titanEsportsClub = "Titan Esports Club"
+    case traceEsports = "Trace Esports"
+    case tyloo = "TYLOO"
+    case wolvesEsports = "Wolves Esports"
+    case xiLaiGaming = "Xi Lai Gaming"
+    case dragonRangerGaming = "Dragon Ranger Gaming"
 }
 
 let emeaTeams: [Team] = [
-    .BBLEsport,
-    .FNATIC,
-    .FUTEsports,
-    .GentleMates,
-    .GIANTX,
-    .KarmineCorp,
-    .NatusVincere,
-    .TeamHeretics,
-    .TeamLiquid,
-    .TeamVitality,
-    .ULFEsports,
-    .PCIFICEsports
+    .bblEsport,
+    .fnatic,
+    .futEsports,
+    .gentleMates,
+    .giantx,
+    .karmineCorp,
+    .natusVincere,
+    .teamHeretics,
+    .teamLiquid,
+    .teamVitality,
+    .ulfEsports,
+    .pcificEsports
 ]
 
 let americasTeams: [Team] = [
-    .HunredThieves,
-    .Cloud9,
-    .EvilGeniuses,
-    .FURIA,
-    .KRUEsports,
-    .LEVIATAN,
-    .LOUD,
-    .MIBR,
-    .NRG,
-    .Sentinels,
-    .G2Esports,
-    .ENVY
+    .hunredThieves,
+    .cloud9,
+    .evilGeniuses,
+    .furia,
+    .kruEsports,
+    .leviatan,
+    .loud,
+    .mibr,
+    .nrg,
+    .sentinels,
+    .g2Esports,
+    .envy
 ]
 
 let pacificTeams: [Team] = [
-    .DetonatioNFocusMe,
-    .DRX,
-    .FullSense,
-    .GenG,
-    .GlobalEsports,
-    .PaperRex,
-    .RexRegumQeon,
-    .T1,
-    .TeamSecret,
-    .ZetaDivision,
-    .VARREL,
-    .NongshimRedForce
+    .detonationFocusMe,
+    .drx,
+    .fullSense,
+    .genG,
+    .globalEsports,
+    .paperRex,
+    .rexRegumQeon,
+    .t1,
+    .teamSecret,
+    .zetaDivision,
+    .varrel,
+    .nongshimRedForce
 ]
 
 let chinaTeams: [Team] = [
-    .AllGamers,
-    .BilibililiGaming,
-    .EdwardGaming,
-    .FunPlusPhoenix,
-    .JDGEsports,
-    .NovaEsports,
-    .TitaEsportsClub,
-    .TraceEsports,
-    .TYLOO,
-    .WolvesEsports,
-    .XiLaiGaming,
-    .DragonRangerGaming
+    .allGamers,
+    .bilibililiGaming,
+    .edwardGaming,
+    .funPlusPhoenix,
+    .jdgEsports,
+    .novaEsports,
+    .titanEsportsClub,
+    .traceEsports,
+    .tyloo,
+    .wolvesEsports,
+    .xiLaiGaming,
+    .dragonRangerGaming
 ]

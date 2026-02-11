@@ -79,7 +79,12 @@ struct VLRScraper {
                         let matchItems = try card.select("a.wf-module-item.match-item")
                         for matchElement in matchItems.array() {
                             do {
-                                let match = try matchFromElement(matchElement, date: currentDate, timeZone: timeZone, logger: logger)
+                                let match = try matchFromElement(
+                                    matchElement,
+                                    date: currentDate,
+                                    timeZone: timeZone,
+                                    logger: logger
+                                )
                                 matches.append(match)
                             } catch {
                                 logger?.debug("Error parse match: \(error)")
@@ -125,7 +130,7 @@ struct VLRScraper {
                 // Expect something like: "11:00 PM CET" or "9:30 AM PDT"
                 let parts = text.split(separator: " ")
                 if parts.count >= 3 {
-                    let tzAbbr = String(parts.last!)
+                    let tzAbbr = String(parts.last ?? "N/A")
                     if let tz = timeZone(fromAbbreviation: tzAbbr) {
                         logger?.debug("detectTimeZone: Detected \(tz) for abbreviation \(tzAbbr)")
                         return tz
@@ -162,8 +167,16 @@ struct VLRScraper {
         if homeTeam == "TBD" || awayTeam == "TBD" || matchTime == "TBD" {
             throw SimpleError(message: "TBD match")
         }
-        let event = try matchElement.select("div.match-item-event.text-of").first?.ownText().trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let series = try matchElement.select("div.match-item-event-series.text-of").first?.ownText().trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let event = try matchElement
+            .select("div.match-item-event.text-of")
+            .first?
+            .ownText()
+            .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let series = try matchElement
+            .select("div.match-item-event-series.text-of")
+            .first?
+            .ownText()
+            .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let datetimeString = date.isEmpty ? matchTime : "\(date) \(matchTime)"
         logger?.debug("VLRScrapers: Parsing: \(datetimeString)")
         let formatter = DateFormatter()

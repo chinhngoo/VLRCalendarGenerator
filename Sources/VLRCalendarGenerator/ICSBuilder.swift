@@ -18,12 +18,12 @@ func icsEscape(_ text: String) -> String {
 
 // Format dates as UTC Zulu timestamps: 20260203T170000Z
 func icsDateString(_ date: Date) -> String {
-    let f = DateFormatter()
-    f.calendar = Calendar(identifier: .gregorian)
-    f.locale = Locale(identifier: "en_US_POSIX")
-    f.timeZone = TimeZone(secondsFromGMT: 0) // UTC
-    f.dateFormat = "yyyyMMdd'T'HHmmss'Z'"
-    return f.string(from: date)
+    let formatter = DateFormatter()
+    formatter.calendar = Calendar(identifier: .gregorian)
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    formatter.timeZone = TimeZone(secondsFromGMT: 0) // UTC
+    formatter.dateFormat = "yyyyMMdd'T'HHmmss'Z'"
+    return formatter.string(from: date)
 }
 
 // Build a stable UID by combining fields and removing spaces.

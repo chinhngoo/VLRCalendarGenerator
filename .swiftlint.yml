@@ -1,0 +1,44 @@
+# SwiftLint Configuration
+# See: https://realm.github.io/SwiftLint/
+
+# Paths
+included:
+  - Sources
+  - Tests
+
+excluded:
+  - .build
+  - .swiftpm
+  - Packages
+  - DerivedData
+
+# Disabled rules that are too restrictive for this project
+disabled_rules:
+  - cyclomatic_complexity
+  - function_body_length
+  - type_body_length
+
+# Opt-in rules to encourage consistency
+opt_in_rules:
+  - empty_count
+  - force_unwrapping
+  - number_separator
+  - redundant_nil_coalescing
+  - sorted_imports
+  - yoda_condition
+
+# Customization
+line_length:
+  ignores_comments: true
+  ignores_urls: true
+  ignores_function_declarations: true
+  ignores_interpolated_strings: true
+
+identifier_name:
+  min_length: 2
+  excluded: [id, x, y, i, j]
+
+trailing_whitespace:
+  ignores_empty_lines: true
+
+reporter: "xcode"
