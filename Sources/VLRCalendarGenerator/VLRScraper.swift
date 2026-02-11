@@ -133,6 +133,7 @@ struct VLRScraper {
         let event = try matchElement.select("div.match-item-event.text-of").first?.ownText().trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let series = try matchElement.select("div.match-item-event-series.text-of").first?.ownText().trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let datetimeString = date.isEmpty ? matchTime : "\(date) \(matchTime)"
+        logger?.debug("VLRScrapers: Parsing: \(datetimeString)")
         let timestamp = Match.parseDateStringToTimestamp(datetimeString)
         if timestamp == 0 {
             logger?.debug("Failed to parse datetime: \(datetimeString)")
