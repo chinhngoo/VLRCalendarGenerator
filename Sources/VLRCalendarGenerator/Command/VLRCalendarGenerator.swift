@@ -120,7 +120,7 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
         }
         // Sometimes, there is no scheduled event for a specific team if they are eliminated
         // but the ics file should still updated so subsribers aren't interrupted
-        let content = buildICS(from: matches, name: name)
+        let content = buildICS(from: matches, name: calendarName)
         let URL = outDirURL.appendingPathComponent(name + ".ics")
         try content.write(to: URL, atomically: true, encoding: .utf8)
         logger.info("Wrote \(name) events to \(URL.path)")
