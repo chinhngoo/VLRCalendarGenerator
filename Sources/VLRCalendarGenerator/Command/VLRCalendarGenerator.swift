@@ -11,7 +11,9 @@ import Foundation
 @main
 struct VLRCalendarGenerator: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
-        abstract: "Generate a VLR calendar from upcoming matches"
+        commandName: "vlr-calendar-generator",
+        abstract: "Generate a VLR calendar from upcoming matches",
+        version: "1.0.0"
     )
 
     @Flag(name: [.long, .short], help: "Enable verbose logging")
