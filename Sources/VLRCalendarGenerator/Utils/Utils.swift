@@ -33,7 +33,8 @@ func timeZone(fromAbbreviation abbreviation: String) -> TimeZone? {
           "EDT": "America/New_York",
           "GMT": "GMT",
           "UTC": "UTC",
-          "BST": "Europe/London"
+          "BST": "Europe/London",
+          "CST": "America/Chicago"
       ]
     if let id = mapping[abbreviation] {
         return TimeZone(identifier: id)

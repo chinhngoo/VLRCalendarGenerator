@@ -168,7 +168,7 @@ struct VLRScraper {
         logger?.debug("VLRScrapers: Parsing: \(datetimeString)")
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = .current
+        formatter.timeZone = timeZone
         formatter.dateFormat = "EEE, MMMM d, yyyy h:mm a"
         let timestamp = formatter.date(from: datetimeString)?.timeIntervalSince1970 ?? 0
         if timestamp == 0 {
