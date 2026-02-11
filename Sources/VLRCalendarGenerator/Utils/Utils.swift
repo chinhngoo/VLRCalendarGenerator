@@ -22,3 +22,21 @@ func sanitizedFileName(_ raw: String) -> String {
     // Optional: lowercasing, collapsing multiple underscores, etc.
     return underscored
 }
+
+func timeZone(fromAbbreviation abbreviation: String) -> TimeZone? {
+    let mapping: [String: String] = [
+          "CET": "Europe/Paris",
+          "CEST": "Europe/Paris",
+          "PST": "America/Los_Angeles",
+          "PDT": "America/Los_Angeles",
+          "EST": "America/New_York",
+          "EDT": "America/New_York",
+          "GMT": "GMT",
+          "UTC": "UTC",
+          "BST": "Europe/London"
+      ]
+    if let id = mapping[abbreviation] {
+        return TimeZone(identifier: id)
+    }
+    return nil
+}

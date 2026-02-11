@@ -14,31 +14,11 @@ struct SimpleError: Error, CustomStringConvertible {
 }
 
 struct Match: Codable {
-    let startTimestamp: Int
+    let startTimestamp: TimeInterval
     let homeTeam: String
     let awayTeam: String
     let event: String
     let series: String
-
-    static func parseDateStringToTimestamp(
-        _ dateString: String
-    ) -> Int {
-        let formatter = dateFormatter
-        if let date = formatter.date(from: dateString) {
-            return Int(date.timeIntervalSince1970)
-        } else {
-            print("Failed to parse datetime: \(dateString)")
-            return 0
-        }
-    }
-
-    static var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = .current
-        formatter.dateFormat = "EEE, MMMM d, yyyy h:mm a"
-        return formatter
-    }
 }
 
 extension Element {
@@ -52,6 +32,7 @@ struct VLRScraper {
         pages: Int,
         logger: Logging? = nil
     ) async -> [Match] {
+        let timeZone = await getTimeZone(logger: logger) ?? TimeZone(identifier: "America/Chicago")
         var matches = [Match]()
         for page in 1...pages {
             let urlString = "https://www.vlr.gg/matches?page=\(page)"
@@ -65,7 +46,7 @@ struct VLRScraper {
                     logger?.error("Failed to decode HTML")
                     return matches
                 }
-                let parsedMatches = try matchesFromHTML(html, logger: logger)
+                let parsedMatches = try matchesFromHTML(html, timeZone: timeZone, logger: logger)
                 matches.append(contentsOf: parsedMatches)
             } catch {
                 logger?.error("Error fetching or parsing matches: \(error)")
@@ -73,9 +54,10 @@ struct VLRScraper {
         }
         return matches
     }
-
+    
     static func matchesFromHTML(
         _ html: String,
+        timeZone: TimeZone? = nil,
         logger: Logging? = nil
     ) throws -> [Match] {
         let doc = try SwiftSoup.parse(html)
@@ -97,7 +79,7 @@ struct VLRScraper {
                         let matchItems = try card.select("a.wf-module-item.match-item")
                         for matchElement in matchItems.array() {
                             do {
-                                let match = try matchFromElement(matchElement, date: currentDate, logger: logger)
+                                let match = try matchFromElement(matchElement, date: currentDate, timeZone: timeZone, logger: logger)
                                 matches.append(match)
                             } catch {
                                 logger?.debug("Error parse match: \(error)")
@@ -112,10 +94,60 @@ struct VLRScraper {
         }
         return matches
     }
-
+    
+    static func getTimeZone(logger: Logging? = nil) async -> TimeZone? {
+        let urlString = "https://www.vlr.gg"
+        guard let url = URL(string: urlString) else {
+            logger?.error("Invalid URL")
+            return nil
+        }
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            guard let html = String(data: data, encoding: .utf8) else {
+                logger?.error("Failed to decode HTML")
+                return nil
+            }
+            return detectTimeZone(fromHTML: html, logger: logger)
+        } catch {
+            logger?.error("Failed to decode HTML")
+            return nil
+        }
+    }
+    
+    /// Extracts a TimeZone from the provided VLR HTML by inspecting the preview time element.
+    /// Returns the detected TimeZone, or nil if not found.
+    static func detectTimeZone(fromHTML html: String, logger: Logging? = nil) -> TimeZone? {
+        do {
+            let doc = try SwiftSoup.parse(html)
+            // Find the first preview time element that contains the displayed time with tz abbreviation
+            if let preview = try doc.select("div.h-match-preview-time.moment-tz-convert").first() {
+                let text = try preview.text().trimmingCharacters(in: .whitespacesAndNewlines)
+                // Expect something like: "11:00 PM CET" or "9:30 AM PDT"
+                let parts = text.split(separator: " ")
+                if parts.count >= 3 {
+                    let tzAbbr = String(parts.last!)
+                    if let tz = timeZone(fromAbbreviation: tzAbbr) {
+                        logger?.debug("detectTimeZone: Detected \(tz) for abbreviation \(tzAbbr)")
+                        return tz
+                    } else {
+                        logger?.debug("detectTimeZone: Unrecognized abbreviation: \(tzAbbr)")
+                    }
+                } else {
+                    logger?.debug("detectTimeZone: Unexpected preview text format: \(text)")
+                }
+            } else {
+                logger?.debug("detectTimeZone: No preview element found")
+            }
+        } catch {
+            logger?.debug("detectTimeZone: Failed to parse HTML: \(error)")
+        }
+        return nil
+    }
+    
     static func matchFromElement(
         _ matchElement: Element,
         date: String,
+        timeZone: TimeZone? = nil,
         logger: Logging? = nil
     ) throws -> Match {
         var date = date
@@ -134,7 +166,11 @@ struct VLRScraper {
         let series = try matchElement.select("div.match-item-event-series.text-of").first?.ownText().trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let datetimeString = date.isEmpty ? matchTime : "\(date) \(matchTime)"
         logger?.debug("VLRScrapers: Parsing: \(datetimeString)")
-        let timestamp = Match.parseDateStringToTimestamp(datetimeString)
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = .current
+        formatter.dateFormat = "EEE, MMMM d, yyyy h:mm a"
+        let timestamp = formatter.date(from: datetimeString)?.timeIntervalSince1970 ?? 0
         if timestamp == 0 {
             logger?.debug("Failed to parse datetime: \(datetimeString)")
         }
@@ -145,7 +181,7 @@ struct VLRScraper {
             event: event,
             series: series
         )
-        let readableDate = Match.dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
+        let readableDate = formatter.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
         logger?.debug("\(timestamp) (\(readableDate)): \(match.homeTeam) vs \(match.awayTeam) — \(match.event), \(match.series)")
         return match
     }
