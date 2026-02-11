@@ -60,7 +60,7 @@ enum Team: String, Codable, CaseIterable {
     case DragonRangerGaming = "Dragon Ranger Gaming"
 }
 
-let EMEATeams: [Team] = [
+let emeaTeams: [Team] = [
     .BBLEsport,
     .FNATIC,
     .FUTEsports,
@@ -75,7 +75,7 @@ let EMEATeams: [Team] = [
     .PCIFICEsports
 ]
 
-let AMERICATeams: [Team] = [
+let americasTeams: [Team] = [
     .HunredThieves,
     .Cloud9,
     .EvilGeniuses,
@@ -90,7 +90,7 @@ let AMERICATeams: [Team] = [
     .ENVY
 ]
 
-let PACIFICTeams: [Team] = [
+let pacificTeams: [Team] = [
     .DetonatioNFocusMe,
     .DRX,
     .FullSense,
@@ -105,7 +105,7 @@ let PACIFICTeams: [Team] = [
     .NongshimRedForce
 ]
 
-let ChinaTeams: [Team] = [
+let chinaTeams: [Team] = [
     .AllGamers,
     .BilibililiGaming,
     .EdwardGaming,

@@ -12,9 +12,25 @@ enum Tournament: String {
     case VCT2026AmericasKickoff = "VCT 2026: Americas Kickoff"
 }
 
-let VCTTournaments: [Tournament] = [
+let vctTournaments: [Tournament] = [
     Tournament.VCT2026EMEAKickoff,
     Tournament.VCT2026ChinaKickoff,
     Tournament.VCT2026PacificKickoff,
+    Tournament.VCT2026AmericasKickoff
+]
+
+let emeaTournaments: [Tournament] = [
+    Tournament.VCT2026EMEAKickoff
+]
+
+let chinaTournaments: [Tournament] = [
+    Tournament.VCT2026ChinaKickoff
+]
+
+let pacificTournaments: [Tournament] = [
+    Tournament.VCT2026PacificKickoff
+]
+
+let americasTournaments: [Tournament] = [
     Tournament.VCT2026AmericasKickoff
 ]

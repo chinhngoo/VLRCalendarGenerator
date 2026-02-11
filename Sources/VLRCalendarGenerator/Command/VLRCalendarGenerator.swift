@@ -36,43 +36,70 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
         // Ensure output directory exists
         let outDirURL = URL(fileURLWithPath: outputDir)
         try FileManager.default.createDirectory(at: outDirURL, withIntermediateDirectories: true)
-        let ICSOutputURL = outDirURL.appendingPathComponent("ICS")
-        try FileManager.default.createDirectory(at: ICSOutputURL, withIntermediateDirectories: true)
+        let icsOutputURL = outDirURL.appendingPathComponent("ics")
+        try FileManager.default.createDirectory(at: icsOutputURL, withIntermediateDirectories: true)
+        
+        logger.info("Generating ICS files…")
+        let vctData = try await generateCalendars(from: allMatches, output: icsOutputURL, logger: logger)
+        
+        logger.info("Building static site…")
+        let fullPage = HTMLBuilder.buildFullPage(data: vctData)
+        let indexPageURL = outDirURL.appendingPathComponent("index.html")
+        try fullPage.write(to: indexPageURL, atomically: true, encoding: .utf8)
+    }
+    
+    private func generateCalendars(from allMatches: [Match], output: URL, logger: Logging) async throws -> VCTData {
+        var vctMatches: [Match] = []
+        let regions: [Region] = [americas, china, emea, pacific]
+        var regionFeeds: [RegionFeed] = []
+        let tournamentDictionary: [String: [Match]] = Dictionary(grouping: allMatches, by: { $0.event })
+        let teamDictionary: [String: [Match]] = allMatches.reduce(into: [:]) { dict, match in
+            dict[match.homeTeam, default: []].append(match)
+            dict[match.awayTeam, default: []].append(match)
+        }
 
-        // ICS for all VCT tournaments
-        let tournamentSet = Set(VCTTournaments.map { $0.rawValue })
-        let tournamentMatches = allMatches.filter { tournamentSet.contains($0.event) }
-        try writeICSFile(
-            matches: tournamentMatches,
-            outDirURL: ICSOutputURL,
-            name: "VCT",
+        for region in regions {
+            var feed: RegionFeed = .init(name: region.name, tournaments: [], teams: [])
+            for tournament in region.tournaments {
+                let name = tournament.rawValue
+                let matches = tournamentDictionary[name, default: []]
+                let fileName = try writeICSFile(
+                    matches: tournamentDictionary[name, default: []],
+                    outDirURL: output,
+                    name: sanitizedFileName(name),
+                    logger: logger
+                )
+                feed.tournaments.append(.init(name: name, fileName: fileName))
+                if vctTournaments.contains(tournament) {
+                    vctMatches += matches
+                }
+            }
+            for team in region.teams {
+                let name = team.rawValue
+                let fileName = try writeICSFile(
+                    matches: teamDictionary[name, default: []],
+                    outDirURL: output,
+                    name: sanitizedFileName(name),
+                    logger: logger
+                )
+                feed.teams.append(.init(name: name, fileName: fileName))
+            }
+            regionFeeds.append(feed)
+        }
+        let vctFileName = try writeICSFile(
+            matches: vctMatches,
+            outDirURL: output,
+            name: "All_VCT_Matches",
             logger: logger
         )
 
-        // Per tournament ICS
-        for tournament in VCTTournaments {
-            let name = tournament.rawValue
-            let filtered = allMatches.filter { $0.event == name }
-            let fileName = sanitizedFileName(name)
-            try writeICSFile(
-                matches: filtered,
-                outDirURL: ICSOutputURL,
-                name: fileName,
-                logger: logger
-            )
-        }
-
-        // Per team ICS
-        for team in Team.allCases {
-            let name = team.rawValue
-            let filtered = allMatches.filter { $0.homeTeam == name || $0.awayTeam == name }
-            try writeICSFile(
-                matches: filtered,
-                outDirURL: ICSOutputURL,
-                name: sanitizedFileName(name),
-                logger: logger
-            )
-        }
+        return VCTData(
+            allVCTMatches: CalendarSource(
+                name: "All VCT Matches",
+                fileName: vctFileName
+            ),
+            regions: regionFeeds
+        )
     }
     
     private func writeICSFile(
@@ -80,15 +107,16 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
         outDirURL: URL,
         name: String,
         logger: Logging
-    ) throws {
+    ) throws -> String {
         if matches.isEmpty {
             logger.debug("No matches found for \(name)")
         }
         // Sometimes, there is no scheduled event for a specific team if they are eliminated
-        // but the ics file should still updated
+        // but the ics file should still updated so subsribers aren't interrupted
         let content = buildICS(from: matches)
         let URL = outDirURL.appendingPathComponent(name + ".ics")
         try content.write(to: URL, atomically: true, encoding: .utf8)
         logger.info("Wrote \(name) events to \(URL.path)")
+        return URL.lastPathComponent
     }
 }

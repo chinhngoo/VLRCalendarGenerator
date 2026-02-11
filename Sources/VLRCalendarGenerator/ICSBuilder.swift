@@ -46,7 +46,7 @@ func vevent(for match: Match, now: Date = Date()) -> String {
     let dtstart = icsDateString(start)
     let dtend = icsDateString(end)
 
-    let summary = "\(match.event) — \(match.homeTeam) vs \(match.awayTeam)"
+    let summary = "\(match.homeTeam) vs \(match.awayTeam) - \(match.event)"
 
     return """
     BEGIN:VEVENT
