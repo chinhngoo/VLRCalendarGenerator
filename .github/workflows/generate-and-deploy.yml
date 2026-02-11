@@ -41,7 +41,7 @@ jobs:
 
       - name: Generate ICS
         run: |
-          swift run vlr-calendar-generator --pages 5 --output-dir ./${{ env.OUTPUT_DIR }} --verbose
+          .build/release/vlr-calendar-generator --pages 5 --output-dir ./${{ env.OUTPUT_DIR }} --verbose
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
