@@ -17,6 +17,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
+  TZ: UTC
   OUTPUT_DIR: Publish
 
 jobs:
@@ -24,6 +25,9 @@ jobs:
     runs-on: macos-26
 
     steps:
+      - name: Check Runner Time
+        run: date
+
       - name: Checkout
         uses: actions/checkout@v4
 
