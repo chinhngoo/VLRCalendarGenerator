@@ -34,6 +34,9 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
         logger.debug("Scraping upcoming matches for \(pages) pages…")
         let allMatches = await VLRScraper.scrapeUpcomingMatches(pages: pages, logger: logger)
         logger.debug("Retrieved \(allMatches.count) matches")
+        if allMatches.isEmpty {
+            throw SimpleError(message: "No match scraped.")
+        }
 
         // Ensure output directory exists
         let outDirURL = URL(fileURLWithPath: outputDir)
