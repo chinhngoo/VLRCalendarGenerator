@@ -14,6 +14,7 @@ struct SimpleError: Error, CustomStringConvertible {
 }
 
 struct Match: Codable {
+    let id: Int
     let startTimestamp: TimeInterval
     let homeTeam: String
     let awayTeam: String
@@ -160,12 +161,17 @@ struct VLRScraper {
             let trimmed = date.dropLast("Today".count)
             date = trimmed.trimmingCharacters(in: .whitespacesAndNewlines)
         }
+        let href = try matchElement.attr("href")
+        let matchId = Int(href.split(separator: "/").first ?? "")
+        guard let matchId = matchId else {
+            throw SimpleError(message: "Failed to parse matchId: \(href)")
+        }
         let matchTime = try matchElement.select("div.match-item-time").first?.formatedText ?? ""
         let teams = try matchElement.select("div.match-item-vs-team-name")
         let homeTeam = teams.array().first?.formatedText ?? ""
         let awayTeam = teams.array().dropFirst().first?.formatedText ?? ""
-        if homeTeam == "TBD" || awayTeam == "TBD" || matchTime == "TBD" {
-            throw SimpleError(message: "TBD match")
+        if matchTime == "TBD" {
+            throw SimpleError(message: "TBD match time")
         }
         let event = try matchElement
             .select("div.match-item-event.text-of")
@@ -188,6 +194,7 @@ struct VLRScraper {
             logger?.debug("Failed to parse datetime: \(datetimeString)")
         }
         let match = Match(
+            id: matchId,
             startTimestamp: timestamp,
             homeTeam: homeTeam,
             awayTeam: awayTeam,

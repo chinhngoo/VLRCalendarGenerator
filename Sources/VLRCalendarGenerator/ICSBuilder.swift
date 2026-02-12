@@ -26,21 +26,10 @@ func icsDateString(_ date: Date) -> String {
     return formatter.string(from: date)
 }
 
-// Build a stable UID by combining fields and removing spaces.
-func icsUID(event: String, series: String, homeTeam: String, awayTeam: String) -> String {
-    let combined = "\(event)\(series)\(homeTeam)\(awayTeam)"
-    let noSpaces = combined.replacingOccurrences(of: " ", with: "")
-    let allowed = CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "-_.@"))
-    let safeScalars = noSpaces.unicodeScalars.filter { allowed.contains($0) }
-    return String(String.UnicodeScalarView(safeScalars))
-}
-
 // Create a VEVENT block from a Match.
 func vevent(for match: Match, now: Date = Date()) -> String {
     let start = Date(timeIntervalSince1970: TimeInterval(match.startTimestamp))
     let end = Date(timeIntervalSince1970: TimeInterval(match.startTimestamp + 2 * 60 * 60)) // +2 hours
-
-    let uid = icsUID(event: match.event, series: match.series, homeTeam: match.homeTeam, awayTeam: match.awayTeam)
 
     let dtstamp = icsDateString(now)
     let dtstart = icsDateString(start)
@@ -50,7 +39,7 @@ func vevent(for match: Match, now: Date = Date()) -> String {
 
     return """
     BEGIN:VEVENT
-    UID:\(uid)
+    UID:\(match.id)
     DTSTAMP:\(dtstamp)
     DTSTART:\(dtstart)
     DTEND:\(dtend)
