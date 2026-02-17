@@ -5,32 +5,19 @@
 //  Created by Chinh Ngo on 02.02.26.
 //
 
+// Ongoing and upcoming tournaments to be exact
 enum Tournament: String {
-    case VCT2026EMEAKickoff = "VCT 2026: EMEA Kickoff"
-    case VCT2026ChinaKickoff = "VCT 2026: China Kickoff"
-    case VCT2026PacificKickoff = "VCT 2026: Pacific Kickoff"
-    case VCT2026AmericasKickoff = "VCT 2026: Americas Kickoff"
+    case VCT2026MastersSantiago2026 = "Valorant Masters Santiago 2026"
 }
 
 let vctTournaments: [Tournament] = [
-    Tournament.VCT2026EMEAKickoff,
-    Tournament.VCT2026ChinaKickoff,
-    Tournament.VCT2026PacificKickoff,
-    Tournament.VCT2026AmericasKickoff
+    .VCT2026MastersSantiago2026
 ]
 
-let emeaTournaments: [Tournament] = [
-    Tournament.VCT2026EMEAKickoff
-]
+let emeaTournaments: [Tournament] = []
 
-let chinaTournaments: [Tournament] = [
-    Tournament.VCT2026ChinaKickoff
-]
+let chinaTournaments: [Tournament] = []
 
-let pacificTournaments: [Tournament] = [
-    Tournament.VCT2026PacificKickoff
-]
+let pacificTournaments: [Tournament] = []
 
-let americasTournaments: [Tournament] = [
-    Tournament.VCT2026AmericasKickoff
-]
+let americasTournaments: [Tournament] = []
