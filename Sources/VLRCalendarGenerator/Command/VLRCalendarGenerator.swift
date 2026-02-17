@@ -25,6 +25,12 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
     @Option(name: .long, help: "Output directory for generated files")
     var outputDir: String = "./Publish"
 
+    /// Executes the command to scrape upcoming matches, generate calendar files, and build the static site.
+    ///
+    /// Orchestrates scraping VLR for upcoming matches, generating per-region, per-tournament, and per-team
+    /// ICS files, and writing an index page into the output directory.
+    ///
+    /// - Throws: `SimpleError` if no matches are scraped, or any error encountered while creating directories or writing files.
     mutating func run() async throws {
         let logger: Logging = Logger(isVerbose: verbose)
 
@@ -53,6 +59,17 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
         try fullPage.write(to: indexPageURL, atomically: true, encoding: .utf8)
     }
     
+    /// Generates calendar files for VCT regions, tournaments, and teams and returns site metadata.
+    ///
+    /// Groups the provided matches by tournament and team, writes per-group ICS files, and aggregates
+    /// VCT-branded matches into a single calendar.
+    ///
+    /// - Parameters:
+    ///   - allMatches: The complete list of scraped matches.
+    ///   - output: The directory where .ics files will be written.
+    ///   - logger: The logger used for diagnostics.
+    /// - Returns: A `VCTData` value describing the generated calendars for use when building the site.
+    /// - Throws: Errors thrown while writing ICS files.
     private func generateCalendars(from allMatches: [Match], output: URL, logger: Logging) async throws -> VCTData {
         var vctMatches: [Match] = []
         let regions: [Region] = [americas, china, emea, pacific]
@@ -111,6 +128,19 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
         )
     }
     
+    /// Writes an .ics file for the given matches.
+    ///
+    /// Creates or overwrites a file named `name.ics` within `outDirURL` using `calendarName`
+    /// as the calendar title.
+    ///
+    /// - Parameters:
+    ///   - matches: The matches to include in the calendar (may be empty).
+    ///   - outDirURL: The directory where the file should be written.
+    ///   - calendarName: The human-readable calendar name embedded in the ICS content.
+    ///   - name: The base file name (without extension) to use for the output file.
+    ///   - logger: The logger used for diagnostics.
+    /// - Returns: The last path component of the written file (e.g., "Team_X.ics").
+    /// - Throws: An error if the content cannot be written to disk.
     private func writeICSFile(
         matches: [Match],
         outDirURL: URL,
