@@ -39,7 +39,7 @@ jobs:
       - name: Build
         run: swift build -c release
 
-      - name: Generate ICS
+      - name: Generate ICS and Index Page
         run: |
           .build/release/vlr-calendar-generator --pages 5 --output-dir ./${{ env.OUTPUT_DIR }} --verbose
 
