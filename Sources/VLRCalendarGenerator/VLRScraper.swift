@@ -29,6 +29,17 @@ extension Element {
 }
 
 struct VLRScraper {
+    /// Fetches and parses upcoming matches from VLR across the specified number of pages.
+    ///
+    /// This method attempts to detect the site's current time zone via `getTimeZone(logger:)`
+    /// and falls back to "America/Chicago" if detection fails. It then downloads and parses
+    /// each matches page in order, accumulating the results.
+    ///
+    /// - Parameters:
+    ///   - pages: The number of pages to fetch from the matches listing (starting at 1).
+    ///   - logger: An optional logger used for diagnostics.
+    /// - Returns: All `Match` values discovered across the requested pages.
+    /// - Note: Network requests are performed sequentially. Matches with "TBD" times are skipped.
     static func scrapeUpcomingMatches(
         pages: Int,
         logger: Logging? = nil
@@ -56,6 +67,17 @@ struct VLRScraper {
         return matches
     }
     
+    /// Parses the HTML of a VLR matches listing page into `Match` values.
+    ///
+    /// The parser scans date labels and their following match cards, extracting
+    /// the fields required to build each `Match`.
+    ///
+    /// - Parameters:
+    ///   - html: The raw HTML string of a matches page.
+    ///   - timeZone: The time zone used to interpret date/time strings when computing the start timestamp.
+    ///   - logger: An optional logger used for diagnostics.
+    /// - Returns: An array of parsed `Match` values.
+    /// - Throws: An error if the HTML cannot be parsed into a document.
     static func matchesFromHTML(
         _ html: String,
         timeZone: TimeZone? = nil,
@@ -101,6 +123,12 @@ struct VLRScraper {
         return matches
     }
     
+    /// Retrieves the time zone used by VLR by loading the site home page.
+    ///
+    /// The returned time zone is determined by parsing the page via `detectTimeZone(fromHTML:logger:)`.
+    ///
+    /// - Parameter logger: An optional logger used for diagnostics.
+    /// - Returns: The detected `TimeZone`, or `nil` if it could not be determined.
     static func getTimeZone(logger: Logging? = nil) async -> TimeZone? {
         let urlString = "https://www.vlr.gg"
         guard let url = URL(string: urlString) else {
@@ -120,8 +148,16 @@ struct VLRScraper {
         }
     }
     
-    /// Extracts a TimeZone from the provided VLR HTML by inspecting the preview time element.
-    /// Returns the detected TimeZone, or nil if not found.
+    /// Detects a `TimeZone` by inspecting VLR HTML for a preview time element.
+    ///
+    /// This function looks for a `div.h-match-preview-time.moment-tz-convert` element whose
+    /// text ends with a time zone abbreviation (for example, "CET" or "PDT") and maps that
+    /// abbreviation to a Foundation `TimeZone`.
+    ///
+    /// - Parameters:
+    ///   - html: The raw HTML of a VLR page.
+    ///   - logger: An optional logger used for diagnostics.
+    /// - Returns: The detected `TimeZone`, or `nil` if no known abbreviation is found.
     static func detectTimeZone(fromHTML html: String, logger: Logging? = nil) -> TimeZone? {
         do {
             let doc = try SwiftSoup.parse(html)
@@ -150,6 +186,20 @@ struct VLRScraper {
         return nil
     }
     
+    /// Parses a single match item element into a `Match`.
+    ///
+    /// This reads the match identifier, teams, event, series, and time from the given element,
+    /// combines them with the provided `date`, and converts the resulting date/time into a UNIX
+    /// timestamp using the supplied `timeZone`.
+    ///
+    /// - Parameters:
+    ///   - matchElement: The anchor element representing the match item.
+    ///   - date: The date label string associated with the match card. If the string ends
+    ///           with "Today", that suffix is removed before parsing.
+    ///   - timeZone: The time zone used to interpret the match time string.
+    ///   - logger: An optional logger used for diagnostics.
+    /// - Returns: The parsed `Match`.
+    /// - Throws: A `SimpleError` if the match identifier cannot be parsed or the match time is "TBD".
     static func matchFromElement(
         _ matchElement: Element,
         date: String,
