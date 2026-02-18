@@ -7,11 +7,16 @@
 
 // Ongoing and upcoming tournaments to be exact
 enum Tournament: String {
-    case VCT2026MastersSantiago2026 = "Valorant Masters Santiago 2026"
+    // swiftlint:disable:next inclusive_language
+    case vct2026MastersSantiago2026 = "Valorant Masters Santiago 2026"
 }
 
 let vctTournaments: [Tournament] = [
-    .VCT2026MastersSantiago2026
+    .vct2026MastersSantiago2026
+]
+
+let globalTournaments: [Tournament] = [
+    .vct2026MastersSantiago2026
 ]
 
 let emeaTournaments: [Tournament] = []

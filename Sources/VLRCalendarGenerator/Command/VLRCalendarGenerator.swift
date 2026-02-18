@@ -71,7 +71,6 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
     /// - Returns: A `VCTData` value describing the generated calendars for use when building the site.
     /// - Throws: Errors thrown while writing ICS files.
     private func generateCalendars(from allMatches: [Match], output: URL, logger: Logging) async throws -> VCTData {
-        var vctMatches: [Match] = []
         let regions: [Region] = [americas, china, emea, pacific]
         var regionFeeds: [RegionFeed] = []
         let tournamentDictionary: [String: [Match]] = Dictionary(grouping: allMatches, by: { $0.event })
@@ -93,9 +92,6 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
                     logger: logger
                 )
                 feed.tournaments.append(.init(name: name, fileName: fileName))
-                if vctTournaments.contains(tournament) {
-                    vctMatches += matches
-                }
             }
             for team in region.teams {
                 let name = team.rawValue
@@ -110,6 +106,23 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
             }
             regionFeeds.append(feed)
         }
+
+        let globalTournamentSources: [CalendarSource] = try globalTournaments.map { tournament in
+            let name = tournament.rawValue
+            let fileName = try writeICSFile(
+                matches: tournamentDictionary[name, default: []],
+                outDirURL: output,
+                calendarName: name,
+                name: sanitizedFileName(name),
+                logger: logger
+            )
+            return CalendarSource(name: name, fileName: fileName)
+        }
+
+        let vctMatches = vctTournaments
+            .flatMap { tournamentDictionary[$0.rawValue, default: []] }
+            .sorted { $0.startTimestamp < $1.startTimestamp }
+        
         let allMatchesName = "All VCT Matches"
         let vctFileName = try writeICSFile(
             matches: vctMatches,
@@ -124,6 +137,7 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
                 name: allMatchesName,
                 fileName: vctFileName
             ),
+            globalTournaments: globalTournamentSources,
             regions: regionFeeds
         )
     }

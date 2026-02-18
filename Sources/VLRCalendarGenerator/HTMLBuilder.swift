@@ -18,6 +18,7 @@ struct RegionFeed {
 
 struct VCTData {
     var allVCTMatches: CalendarSource
+    var globalTournaments: [CalendarSource]
     var regions: [RegionFeed]
 }
 
@@ -47,6 +48,7 @@ enum HTMLBuilder {
     // Generates the whole page
     static func buildFullPage(data: VCTData) -> String {
         let allMatchesHTML = node(name: data.allVCTMatches.name, fileName: data.allVCTMatches.fileName, level: 1)
+        let allGlobalTournamentsHTML = data.globalTournaments.map { node(name: "🌍 \($0.name)", fileName: $0.fileName, level: 1) }.joined()
         let regionHTML = data.regions.map { regionBlock(region: $0) }.joined()
         
         return #"""
@@ -63,6 +65,7 @@ enum HTMLBuilder {
             <div class="tree-root">
             <h1>VCT Calendar Hub</h1>
             \#(allMatchesHTML)
+            \#(allGlobalTournamentsHTML)
             \#(regionHTML)
             \#(pageScript)
         </div>
