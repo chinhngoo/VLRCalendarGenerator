@@ -71,7 +71,7 @@ let emeaTeams: [Team] = [
     .teamHeretics,
     .teamLiquid,
     .teamVitality,
-    .ulfEsports,
+    .eternalFire,
     .pcificEsports
 ]
 
