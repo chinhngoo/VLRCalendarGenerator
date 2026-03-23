@@ -17,8 +17,8 @@ enum Team: String, Codable, CaseIterable {
     case teamHeretics = "Team Heretics"
     case teamLiquid = "Team Liquid"
     case teamVitality = "Team Vitality"
-    case ulfEsports = "ULF Esports"
     case pcificEsports = "PCIFIC Esports"
+    case eternalFire = "Eternal Fire"
     // AMERICA Partners
     case hunredThieves = "100 Thieves"
     case cloud9 = "Cloud9"
