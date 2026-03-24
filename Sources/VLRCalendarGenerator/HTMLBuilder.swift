@@ -16,8 +16,9 @@ struct RegionFeed {
     var teams: [CalendarSource]
 }
 
-struct VCTData {
-    var allVCTMatches: CalendarSource
+struct VLRLeagueCalendarData {
+    var name: String
+    var allMatches: CalendarSource
     var globalTournaments: [CalendarSource]
     var regions: [RegionFeed]
 }
@@ -46,31 +47,40 @@ enum HTMLBuilder {
     }
     
     // Generates the whole page
-    static func buildFullPage(data: VCTData) -> String {
-        let allMatchesHTML = node(name: data.allVCTMatches.name, fileName: data.allVCTMatches.fileName, level: 1)
-        let allGlobalTournamentsHTML = data.globalTournaments.map { node(name: "🌍 \($0.name)", fileName: $0.fileName, level: 1) }.joined()
-        let regionHTML = data.regions.map { regionBlock(region: $0) }.joined()
+    static func buildFullPage(data: [VLRLeagueCalendarData]) -> String {
+        let calendarSection = data.map { leagueHTML(data: $0) }.joined(separator: "\n")
         
         return #"""
         <!DOCTYPE html>
         <html>
         \#(pageHeadHTML)
             <body>
-        <div class="container">
-            <header>
-                <h1>VCT Calendar for upcoming matches</h1>
-                <p class="subtitle">Click to subscribe to the respective calendar</p>
-            </header>
+                <div class="container">
+                    <header>
+                        <h1>Valorant Competitive Calendars</h1>
+                        <p class="subtitle">Upcoming matches</p>
+                        <p class="subtitle">Click to subscribe to the respective calendar</p>
+                    </header>
+                    \#(calendarSection)
+                    \#(pageScript)
+                </div>
+            </body>
+        </html>
+        """#
+    }
+    
+    static func leagueHTML(data: VLRLeagueCalendarData) -> String {
+        let allMatchesHTML = node(name: data.allMatches.name, fileName: data.allMatches.fileName, level: 1)
+        let allGlobalTournamentsHTML = data.globalTournaments.map { node(name: "🌍 \($0.name)", fileName: $0.fileName, level: 1) }.joined()
+        let regionHTML = data.regions.map { regionBlock(region: $0) }.joined()
         
-            <div class="tree-root">
-            <h1>VCT Calendar Hub</h1>
+        return #"""
+        <div class="tree-root">
+            <h1>\#(data.name)</h1>
             \#(allMatchesHTML)
             \#(allGlobalTournamentsHTML)
             \#(regionHTML)
-            \#(pageScript)
         </div>
-            </body>
-        </html>
         """#
     }
     

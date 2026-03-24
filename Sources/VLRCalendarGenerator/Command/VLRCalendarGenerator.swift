@@ -51,10 +51,10 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
         try FileManager.default.createDirectory(at: icsOutputURL, withIntermediateDirectories: true)
         
         logger.info("Generating ICS files…")
-        let vctData = try await generateCalendars(from: allMatches, output: icsOutputURL, logger: logger)
+        let data = try await generateCalendars(from: allMatches, output: icsOutputURL, logger: logger)
         
         logger.info("Building static site…")
-        let fullPage = HTMLBuilder.buildFullPage(data: vctData)
+        let fullPage = HTMLBuilder.buildFullPage(data: data)
         let indexPageURL = outDirURL.appendingPathComponent("index.html")
         try fullPage.write(to: indexPageURL, atomically: true, encoding: .utf8)
     }
@@ -70,7 +70,7 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
     ///   - logger: The logger used for diagnostics.
     /// - Returns: A `VCTData` value describing the generated calendars for use when building the site.
     /// - Throws: Errors thrown while writing ICS files.
-    private func generateCalendars(from allMatches: [Match], output: URL, logger: Logging) async throws -> VCTData {
+    private func generateCalendars(from allMatches: [Match], output: URL, logger: Logging) async throws -> [VLRLeagueCalendarData] {
         let regions: [Region] = [americas, china, emea, pacific]
         var regionFeeds: [RegionFeed] = []
         let tournamentDictionary: [String: [Match]] = Dictionary(grouping: allMatches, by: { $0.event })
@@ -132,14 +132,16 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
             logger: logger
         )
 
-        return VCTData(
-            allVCTMatches: CalendarSource(
+        return [
+            VLRLeagueCalendarData(
+            name: "Valorant Champions Tours",
+            allMatches: CalendarSource(
                 name: allMatchesName,
                 fileName: vctFileName
             ),
             globalTournaments: globalTournamentSources,
             regions: regionFeeds
-        )
+        )]
     }
     
     /// Writes an .ics file for the given matches.
