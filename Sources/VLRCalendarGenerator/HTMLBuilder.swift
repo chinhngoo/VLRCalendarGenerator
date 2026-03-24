@@ -23,6 +23,11 @@ struct VLRLeagueCalendarData {
     var regions: [RegionFeed]
 }
 
+struct SiteData {
+    let leagues: [VLRLeagueCalendarData]
+    let requests: [CalendarSource]
+}
+
 enum HTMLBuilder {
     // Generates a single row
     static func node(name: String, fileName: String, level: Int) -> String {
@@ -47,9 +52,9 @@ enum HTMLBuilder {
     }
     
     // Generates the whole page
-    static func buildFullPage(data: [VLRLeagueCalendarData]) -> String {
-        let calendarSection = data.map { leagueHTML(data: $0) }.joined(separator: "\n")
-        
+    static func buildFullPage(data: SiteData) -> String {
+        let leagueSection = data.leagues.map { leagueHTML(data: $0) }.joined(separator: "\n")
+        let requestedSection = data.requests.map { node(name: "\($0.name)", fileName: $0.fileName, level: 1) }.joined()
         return #"""
         <!DOCTYPE html>
         <html>
@@ -61,7 +66,12 @@ enum HTMLBuilder {
                         <p class="subtitle">Upcoming matches</p>
                         <p class="subtitle">Click to subscribe to the respective calendar</p>
                     </header>
-                    \#(calendarSection)
+                    \#(leagueSection)
+                    <br>
+                    <div id="requested-team" class="tree-root">
+                        <h1>Requested Teams</h1>
+                        \#(requestedSection)
+                    </div>
                     \#(pageScript)
                 </div>
             </body>
@@ -75,7 +85,7 @@ enum HTMLBuilder {
         let regionHTML = data.regions.map { regionBlock(region: $0) }.joined()
         
         return #"""
-        <div class="tree-root">
+        <div id="\#(sanitizedFileName(data.name).lowercased())" class="tree-root">
             <h1>\#(data.name)</h1>
             \#(allMatchesHTML)
             \#(allGlobalTournamentsHTML)

@@ -58,6 +58,8 @@ enum Team: String, Codable, CaseIterable {
     case wolvesEsports = "Wolves Esports"
     case xiLaiGaming = "Xi Lai Gaming"
     case dragonRangerGaming = "Dragon Ranger Gaming"
+    // Challengers & GC Teams: Request-only for now
+    case shopifyRebellionGold = "Shopify Rebellion Gold"
 }
 
 let emeaTeams: [Team] = [
@@ -118,4 +120,9 @@ let chinaTeams: [Team] = [
     .wolvesEsports,
     .xiLaiGaming,
     .dragonRangerGaming
+]
+
+// Requested
+let requestedTeams: [Team] = [
+    .shopifyRebellionGold
 ]

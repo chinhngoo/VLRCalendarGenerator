@@ -70,7 +70,7 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
     ///   - logger: The logger used for diagnostics.
     /// - Returns: A `VCTData` value describing the generated calendars for use when building the site.
     /// - Throws: Errors thrown while writing ICS files.
-    private func generateCalendars(from allMatches: [Match], output: URL, logger: Logging) async throws -> [VLRLeagueCalendarData] {
+    private func generateCalendars(from allMatches: [Match], output: URL, logger: Logging) async throws -> SiteData {
         let regions: [Region] = [americas, china, emea, pacific]
         var regionFeeds: [RegionFeed] = []
         let tournamentDictionary: [String: [Match]] = Dictionary(grouping: allMatches, by: { $0.event })
@@ -131,17 +131,32 @@ struct VLRCalendarGenerator: AsyncParsableCommand {
             name: "All_VCT_Matches",
             logger: logger
         )
+        
+        let requestedTeamsources: [CalendarSource] = try requestedTeams.map { team in
+            let name = team.rawValue
+            let fileName = try writeICSFile(
+                matches: teamDictionary[name, default: []],
+                outDirURL: output,
+                calendarName: name,
+                name: sanitizedFileName(name),
+                logger: logger
+            )
+            return CalendarSource(name: name, fileName: fileName)
+        }
 
-        return [
-            VLRLeagueCalendarData(
-            name: "Valorant Champions Tours",
-            allMatches: CalendarSource(
-                name: allMatchesName,
-                fileName: vctFileName
-            ),
-            globalTournaments: globalTournamentSources,
-            regions: regionFeeds
-        )]
+        return SiteData(
+            leagues: [
+                VLRLeagueCalendarData(
+                name: "Valorant Champions Tours",
+                allMatches: CalendarSource(
+                    name: allMatchesName,
+                    fileName: vctFileName
+                ),
+                globalTournaments: globalTournamentSources,
+                regions: regionFeeds
+                )],
+            requests: requestedTeamsources
+        )
     }
     
     /// Writes an .ics file for the given matches.
