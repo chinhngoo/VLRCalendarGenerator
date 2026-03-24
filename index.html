@@ -96,14 +96,14 @@
         </style>
 </head>
     <body>
-<div class="container">
-    <header>
-        <h1>VCT Calendar for upcoming matches</h1>
-        <p class="subtitle">Click to subscribe to the respective calendar</p>
-    </header>
-
-    <div class="tree-root">
-    <h1>VCT Calendar Hub</h1>
+        <div class="container">
+            <header>
+                <h1>Valorant Competitive Calendars</h1>
+                <p class="subtitle">Upcoming matches</p>
+                <p class="subtitle">Click to subscribe to the respective calendar</p>
+            </header>
+            <div id="valorant_champions_tours" class="tree-root">
+    <h1>Valorant Champions Tours</h1>
     <div class="node level-1">
     <span class="label">All VCT Matches</span>
     <div class="links" data-file="All_VCT_Matches.ics"></div>
@@ -280,7 +280,16 @@
     <span class="label">🎮 Nongshim RedForce</span>
     <div class="links" data-file="Nongshim_RedForce.ics"></div>
 </div>
-    <script>
+</div>
+            <br>
+            <div id="requested-team" class="tree-root">
+                <h1>Requested Teams</h1>
+                <div class="node level-1">
+    <span class="label">Shopify Rebellion Gold</span>
+    <div class="links" data-file="Shopify_Rebellion_Gold.ics"></div>
+</div>
+            </div>
+            <script>
     const BASE_URL = "raw.githubusercontent.com/chinhngoo/VLRCalendarGenerator/gh-pages/ics/";
 
     document.querySelectorAll('.links').forEach(div => {
@@ -323,6 +332,6 @@
         });
     }
 </script>
-</div>
+        </div>
     </body>
 </html>
