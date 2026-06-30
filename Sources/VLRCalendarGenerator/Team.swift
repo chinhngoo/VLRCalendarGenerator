@@ -34,7 +34,7 @@ enum Team: String, Codable, CaseIterable {
     case envy = "ENVY"
     // PACIFIC Partners
     case detonationFocusMe = "DetonatioN FocusMe"
-    case drx = "DRX"
+    case drx = "KIWOOM DRX"
     case fullSense = "FULL SENSE"
     case genG = "Gen.G"
     case globalEsports = "Global Esports"
