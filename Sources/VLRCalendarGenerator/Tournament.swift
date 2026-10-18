@@ -14,7 +14,9 @@ let vctTournaments: [Tournament] = [
     .gc2026Championship
 ]
 
-let globalTournaments: [Tournament] = []
+let globalTournaments: [Tournament] = [
+    .gc2026Championship
+]
 
 let emeaTournaments: [Tournament] = []
 
