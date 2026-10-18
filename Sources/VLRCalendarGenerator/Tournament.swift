@@ -10,9 +10,7 @@ enum Tournament: String {
     case gc2026Championship = "Game Changers 2026: Championship São Paulo"
 }
 
-let vctTournaments: [Tournament] = [
-    .gc2026Championship
-]
+let vctTournaments: [Tournament] = []
 
 let globalTournaments: [Tournament] = [
     .gc2026Championship
