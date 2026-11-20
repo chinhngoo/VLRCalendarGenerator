@@ -1,3 +1,7 @@
+> **⚠️ This project is no longer maintained.**
+> It is archived and will not receive updates
+
+
 # 📅 VLR Calendar Generator
 
 Automated iCalendar (ICS) feed generator for professional Valorant tournaments and teams' upcoming matches, sourced directly from [vlr.gg](https://www.vlr.gg).
